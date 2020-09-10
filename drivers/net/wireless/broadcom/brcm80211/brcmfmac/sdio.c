@@ -668,14 +668,14 @@ static void pkt_align(struct sk_buff *p, int len, int align)
 static bool data_ok(struct brcmf_sdio *bus)
 {
 	/* Reserve TXCTL_CREDITS credits for txctl */
-	return (bus->tx_max - bus->tx_seq) > TXCTL_CREDITS &&
+	return (u8)(bus->tx_max - bus->tx_seq) > TXCTL_CREDITS &&
 	       ((bus->tx_max - bus->tx_seq) & 0x80) == 0;
 }
 
 /* To check if there's window offered */
 static bool txctl_ok(struct brcmf_sdio *bus)
 {
-	return (bus->tx_max - bus->tx_seq) != 0 &&
+	return (u8)(bus->tx_max - bus->tx_seq) != 0 &&
 	       ((bus->tx_max - bus->tx_seq) & 0x80) == 0;
 }
 
